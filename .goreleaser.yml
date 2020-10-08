@@ -20,6 +20,13 @@ archives:
       windows: Windows
       386: i386
       amd64: x86_64
+    format: zip
+    files:
+      - LICENSE
+      - README.md
+      - console.py
+      - setup.py
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:

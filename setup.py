@@ -4,7 +4,7 @@ setup(
     name='awscli-console-plugin',
     version='0.1',
     py_modules=['console'],
-    data_files=[('bin', ['./console'])],
+    data_files=[('bin', ['./awscli-console-plugin'])],
     install_requires=[
         'awscli',
     ],
