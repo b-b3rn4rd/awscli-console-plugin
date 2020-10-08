@@ -1,0 +1,10 @@
+linters:
+  enable:
+    - golint
+    - govet
+    - megacheck
+  disable:
+    - vet
+run:
+  skip-files:
+    - console_test.go
