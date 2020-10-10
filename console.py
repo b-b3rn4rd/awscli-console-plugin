@@ -48,9 +48,9 @@ class Console(BasicCommand):
         """Run the command."""
         cmd = []
 
-        bin = os.path.join(site.USER_BASE, 'bin', 'console')
+        bin = os.path.join(site.USER_BASE, 'bin', 'awscli-console-plugin')
         if not os.path.isfile(bin):
-            bin = os.path.join(sys.prefix, 'bin', 'console')
+            bin = os.path.join(sys.prefix, 'bin', 'awscli-console-plugin')
 
         cmd.append(bin)
 

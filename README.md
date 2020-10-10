@@ -2,20 +2,18 @@
 AWSCLI plugin to access AWS Console using your IAM or STS credentials
 
 # Demo
-
+![awscli-console-plugin demo](console.gif)
 # Motivation
 The following library is distributed as `awscli` plugin, but could be used a standalone tool to access AWS Console
 using IAM access & secret keys or STS temporary credentials.
 The code is based on the following article https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
 
-Often when working with multiple aws accounts there are several profiles defined in the `~/.aws/config` file. 
-I find it tedious to follow the separate process login into individual accounts for Console access (SSO certainly helps). 
-So I came up with this extension to get instant access to a given AWS Console while working in the terminal.
+The goal of this plugin is to simplify the authentication process to AWS Console, by providing a method to authenticate to a given AWS Console while working in the terminal.
 
 # Installation & Usage
-To install it as a plugin for `awslic` follow these steps
+To install it as a plugin for `awscli` please follow these steps
 
-Install `awscli-console-plugin` using pip
+Install `awscli-console-plugin` using `pip`, use an appropriate artifact for your OS from the release page. 
 ```bash
 $ pip install .
 ```
@@ -24,6 +22,7 @@ Modify the `plugin` sections in the `~/.aws/config` file
 ```bash
 [plugins]
 console = console
+
 [profile auth]
 region=ap-southeast-2
 aws_access_key_id=AKIAXXXXXXXXXXX
@@ -34,11 +33,32 @@ region=ap-southeast-2
 source_profile=auth
 ```
 
-Verify that the plugin is operational
+Verify that the plugin is successfully installed
 ```bash
 $ aws console help
+192-168-1-102:~ bernardbaltrusaitis$ aws console help
+NAME
+       console -
+
+DESCRIPTION
+       Authenticate to AWS console
+
+       See 'aws help' for descriptions of global parameters.
+
+SYNOPSIS
+          aws console [--profile=Name] [--timeout=Timeout] [--output-only=true|false]
+
+OPTIONS
+       --timeout  (string)  Console  session  timeout in seconds, only for IAM
+       user credentials
+
+       --output-only (boolean) Print the console url instead of opening it  in
+       the browser
+
+       See 'aws help' for descriptions of global parameters.
 ```
-Usage
+
+Usage Example
 ```bash
 aws console --profile dev
 ```

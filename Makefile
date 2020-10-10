@@ -2,8 +2,6 @@ GOLANGCI_VERSION = 1.24.0
 
 ci: lint test
 .PHONY: ci
-build:
-	GO111MODULE=on env GOOS=linux go build -ldflags="-s -w" console.go
 bin/golangci-lint: bin/golangci-lint-${GOLANGCI_VERSION}
 	@ln -sf golangci-lint-${GOLANGCI_VERSION} bin/golangci-lint
 bin/golangci-lint-${GOLANGCI_VERSION}:
