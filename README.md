@@ -1,4 +1,7 @@
-# awscli-console-plugin
+# awscli-console-plugin 
+[![Go Report Card](https://goreportcard.com/badge/github.com/b-b3rn4rd/awscli-console-plugin)](https://goreportcard.com/report/github.com/b-b3rn4rd/awscli-console-plugin) 
+[![Coverage Status](https://coveralls.io/repos/github/b-b3rn4rd/awscli-console-plugin/badge.svg?branch=master)](https://coveralls.io/github/b-b3rn4rd/awscli-console-plugin?branch=master)
+[![Build](https://github.com/b-b3rn4rd/awscli-console-plugin/workflows/Go/badge.svg)](https://github.com/b-b3rn4rd/awscli-console-plugin/actions?query=workflow%3AGo+branch%3Amaster)
 AWSCLI plugin to access AWS Console using your IAM or STS credentials
 
 # Demo
