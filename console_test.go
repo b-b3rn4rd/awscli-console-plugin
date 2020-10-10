@@ -71,7 +71,7 @@ func TestConsoleUrl(t *testing.T) {
 		err      error
 	}{
 		"siginurl_is_returned_as_expected": {
-			response: "https://signin.aws.amazon.com/federation?Action=login&Destination=http%3A%2F%2Fgoogle.com.au&Issuer=cli2console&SigninToken=token",
+			response: "https://signin.aws.amazon.com/federation?Action=login&Destination=http%3A%2F%2Fgoogle.com.au&Issuer=awscli-console-plugin&SigninToken=token",
 			request: struct {
 				signinToken    string
 				destinationUrl string
