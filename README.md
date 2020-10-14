@@ -12,7 +12,7 @@ The following library is distributed as `awscli` plugin, but could be used a sta
 using IAM access & secret keys or STS temporary credentials.
 The code is based on the following article https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
 
-The goal of this plugin is to simplify the authentication process to AWS Console, by providing a method to authenticate to a given AWS Console while working in the terminal.
+The goal of this plugin is to simplify the authentication process to AWS Console, by providing a method to login to a given account without leaving the terminal.
 
 # Installation & Usage
 To install it as a plugin for `awscli` please follow these steps
