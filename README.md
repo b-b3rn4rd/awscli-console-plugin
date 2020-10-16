@@ -20,10 +20,11 @@ To install it as a plugin for `awscli` please follow these steps
 Install `awscli-console-plugin` using `pip`, use an appropriate artifact for your OS from the release page. 
 ```bash
 $ pip install https://github.com/b-b3rn4rd/awscli-console-plugin/releases/download/1.0.0/awscli-console-plugin_1.0.0_Darwin_x86_64.zip # MacOS
-
+$ pip install https://github.com/b-b3rn4rd/awscli-console-plugin/releases/download/1.0.0/awscli-console-plugin_1.0.0_Linux_x86_64.zip # Linux
+$ pip install https://github.com/b-b3rn4rd/awscli-console-plugin/releases/download/1.0.0/awscli-console-plugin_1.0.0_Windows_x86_64.zip # Windows
 ```
 
-Modify the `plugin` sections in the `~/.aws/config` file
+Modify the `plugins` sections in the `~/.aws/config` file
 ```bash
 [plugins]
 console = console
