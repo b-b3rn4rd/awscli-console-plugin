@@ -42,7 +42,6 @@ source_profile=auth
 Verify that the plugin is successfully installed
 ```bash
 $ aws console help
-192-168-1-102:~ bernardbaltrusaitis$ aws console help
 NAME
        console -
 
