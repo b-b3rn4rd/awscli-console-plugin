@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"os/exec"
 	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -16,7 +17,6 @@ import (
 
 	"github.com/alecthomas/kong"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/skratchdot/open-golang/open"
 )
 
 type Context struct {
@@ -80,12 +80,17 @@ func (cli *Console) consoleURL(signinToken string, destinationURL string) string
 	return consoleURL.String()
 }
 
+// Credentials will only work with one of the latest versions of the AWS Go SDK (see go.mod)
+// 1.40.26 was found to work. Versions < 1.40.x would not read profiles that were kept in
+// ~/.aws/config but only looked at ~/.aws/credentials
 func (cli *Console) Credentials(profile string) (credentials.Value, string, error) {
 	var sess *session.Session
 
 	if profile != "" {
 		sess = session.Must(session.NewSessionWithOptions(session.Options{
 			Profile: profile,
+			// according to some otherwise unrelated Github Issue
+			SharedConfigState: session.SharedConfigEnable,
 		}))
 	} else {
 		sess = session.Must(session.NewSessionWithOptions(session.Options{
@@ -140,9 +145,19 @@ func (cli *Console) Run(ctx *Context) error {
 		return nil
 	}
 
-	err = open.Run(consoleURL)
+	// Have to run the browser "by hand", because of a discovered issues with AWS CLI v2 env vars
+	c := exec.Command("xdg-open", consoleURL)
+	// This is set somewhere in the framework to only the AWS CLI V2 dist path
+	// to the exclusion of everything else.
+	os.Unsetenv("LD_LIBRARY_PATH")
+	c.Env = os.Environ()
+	out, err := c.Output()
 	if err != nil {
-		return fmt.Errorf("error while opening browser, %s", err)
+		if string(out) == "" {
+			e := err.(*exec.ExitError)
+			out = e.Stderr
+		}
+		return fmt.Errorf("error while opening browser, %s", out)
 	}
 
 	return nil
