@@ -2,7 +2,14 @@ import logging
 import subprocess
 import os
 import sys
-import site
+# Kludge because this will throw up when using AWS CLI v2 for unknown reasons (the file is right there,
+# and the path also seems correct)
+try:
+    import site
+    found_site = True
+except:
+    found_site = False
+
 from awscli.customizations.commands import BasicCommand
 
 
@@ -48,9 +55,18 @@ class Console(BasicCommand):
         """Run the command."""
         cmd = []
 
-        bin = os.path.join(site.USER_BASE, 'bin', 'awscli-console-plugin')
-        if not os.path.isfile(bin):
+        # miserable hack because there are issue with AWS CLI V2 which causes this plugin to not find site.py
+        if found_site:
+            bin = os.path.join(site.USER_BASE, 'bin', 'awscli-console-plugin')
+            if not os.path.isfile(bin):
+                bin = os.path.join(sys.prefix, 'bin', 'awscli-console-plugin')
+        else:
             bin = os.path.join(sys.prefix, 'bin', 'awscli-console-plugin')
+            if not os.path.isfile(bin):
+                # in addition when using pyenv, the Go executable will be installed somewhere among the shims
+                # instead of a "normal" location
+                if os.environ['PYENV_ROOT']:
+                    bin = os.path.join(os.environ['PYENV_ROOT'], 'shims', 'awscli-console-plugin')
 
         cmd.append(bin)
 
