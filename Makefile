@@ -1,14 +1,12 @@
-GOLANGCI_VERSION = 1.24.0
+GOLANGCI_VERSION = 1.52.2
 
 ci: lint test
 .PHONY: ci
-bin/golangci-lint: bin/golangci-lint-${GOLANGCI_VERSION}
-	@ln -sf golangci-lint-${GOLANGCI_VERSION} bin/golangci-lint
-bin/golangci-lint-${GOLANGCI_VERSION}:
-	@curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | BINARY=golangci-lint bash -s -- v${GOLANGCI_VERSION}
-	@mv bin/golangci-lint $@
+bin/golangci-lint: 
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v${GOLANGCI_VERSION}
+
 bin/gcov2lcov:
-	@env GOBIN=$$PWD/bin GO111MODULE=on go install github.com/jandelgado/gcov2lcov
+	@env GOBIN=$$PWD/bin GO111MODULE=on go install github.com/jandelgado/gcov2lcov@latest
 lint: bin/golangci-lint
 	@echo "--- lint all the things"
 	@bin/golangci-lint run

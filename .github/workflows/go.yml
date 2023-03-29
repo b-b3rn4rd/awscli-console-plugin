@@ -18,6 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: CI Tasks
+        uses: docker://morphy/revive-action:v2
         run: make ci
 
       - name: Coveralls
