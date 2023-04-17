@@ -86,6 +86,8 @@ func (cli *Console) Credentials(profile string) (credentials.Value, string, erro
 	if profile != "" {
 		sess = session.Must(session.NewSessionWithOptions(session.Options{
 			Profile: profile,
+			// according to some otherwise unrelated Github Issue
+			SharedConfigState: session.SharedConfigEnable,
 		}))
 	} else {
 		sess = session.Must(session.NewSessionWithOptions(session.Options{
