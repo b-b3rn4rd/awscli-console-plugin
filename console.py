@@ -55,18 +55,11 @@ class Console(BasicCommand):
         """Run the command."""
         cmd = []
 
-        # miserable hack because there are issue with AWS CLI V2 which causes this plugin to not find site.py
-        if found_site:
-            bin = os.path.join(site.USER_BASE, 'bin', 'awscli-console-plugin')
-            if not os.path.isfile(bin):
-                bin = os.path.join(sys.prefix, 'bin', 'awscli-console-plugin')
-        else:
-            bin = os.path.join(sys.prefix, 'bin', 'awscli-console-plugin')
-            if not os.path.isfile(bin):
-                # in addition when using pyenv, the Go executable will be installed somewhere among the shims
-                # instead of a "normal" location
-                if os.environ['PYENV_ROOT']:
-                    bin = os.path.join(os.environ['PYENV_ROOT'], 'shims', 'awscli-console-plugin')
+        side_packages = os.path.dirname(os.path.realpath(__file__))
+        try:
+            bin = os.path.join(side_packages, 'awscli-console-plugin', 'awscli-console-plugin')
+        except Exception as e:
+            print('executable is not found at {}'.format(bin))
 
         cmd.append(bin)
 

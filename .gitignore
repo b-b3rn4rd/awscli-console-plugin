@@ -3,3 +3,6 @@
 console
 /awsmocks
 dist
+awscli-console-plugin
+awscli_console_plugin.egg-info/
+build/
