@@ -1,13 +1,11 @@
 from setuptools import setup
+import sysconfig
 
 setup(
     name='awscli-console-plugin',
     version='0.1',
     py_modules=['console'],
-    data_files=[('bin', ['./awscli-console-plugin'])],
-    install_requires=[
-        'awscli',
-    ],
+    data_files=[('/awscli-console-plugin', ['./awscli-console-plugin'])],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -17,5 +15,5 @@ setup(
     author="Bernard Baltrusaitis",
     author_email="bernard@runawaylover.info",
     description="AWSCLI plugin to login to AWS Console using your IAM credentials",
-    python_requires='>=3.6',
+    python_requires='>=3.6'
 )
